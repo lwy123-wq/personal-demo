@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#submit").on('click', function () {
+                $.ajax({
+                    url: "/registrys",
+                    type: 'POST',
+                    data: {'username': $("#username").val(), 'password': $("#password").val()},
+                    success: function (res) {
+                       if(res == "Y"){
+                           alert("success")
+                       }else{
+                           alert("error")
+                       }
+                    },
+                    error: function (res) {
+                        alert("error!!!!!")
+                    }
+                });
+            })
+        });
+
+    </script>
+</head>
+<body>
+用户名<input id="username" type="text"/>
+密码<input id="password" type="password"/>
+<input id="submit" type="submit" value="提交"/>
+</body>
+</html>

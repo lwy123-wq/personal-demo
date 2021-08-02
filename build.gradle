@@ -1,0 +1,43 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'mysql:mysql-connector-java'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //数据库连接
+    compile("org.springframework.boot:spring-boot-starter-jdbc:${spring_boot_version}")
+    compile("mysql:mysql-connector-java:${mysql_connection_version}")
+    //单元测试
+    testCompile("org.springframework.boot:spring-boot-starter-test:${spring_boot_version}")
+    testCompile("junit:junit:4.12")
+    compile("org.springframework.boot:spring-boot-starter-parent:${spring_boot_version}")
+    compile("org.springframework.boot:spring-boot-starter:${spring_boot_version}")
+    //lombok
+    compile("org.projectlombok:lombok:${lombok_version}")
+    //jpa
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${spring_boot_version}")
+    //netty
+    implementation group: 'io.netty', name: 'netty-all', version: '4.1.51.Final'
+    //json
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.76'
+    //springframework
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.3'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.2'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.5.2'
+}
+
+test {
+    useJUnitPlatform()
+}
