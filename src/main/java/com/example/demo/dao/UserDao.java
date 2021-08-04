@@ -5,7 +5,7 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
     //String create(User u);
 
 }*/
-@Component
+@Repository
 public class UserDao implements UserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;

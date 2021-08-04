@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ChatController {
 
-    @GetMapping("login1")
+    @GetMapping("/login1")
     public String login(Model model, @RequestParam("userId") String userId, @RequestParam("sendId") String sendId) {
+
         model.addAttribute("userId", userId);
         model.addAttribute("sendId", sendId);
-        return "chat";
+        return "chat.html";
     }
 
     @GetMapping("/sendMsg")

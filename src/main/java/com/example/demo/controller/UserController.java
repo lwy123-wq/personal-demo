@@ -2,18 +2,21 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.User;
+import com.example.demo.service.PersonServiceImpl;
 import com.example.demo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private PersonServiceImpl personService;
 
    /* @Autowired
     private UserServiceImpl userService;
@@ -34,8 +37,8 @@ public class UserController {
         return userService.create(u);
     }*/
     @RequestMapping("/")
-    public ModelAndView index(){
-        return new ModelAndView("/index.html");
+    public String index(){
+        return  "index.html";
     }
 
     @RequestMapping(value = "/login")
@@ -61,11 +64,12 @@ public class UserController {
     }
     @PostMapping(value = "/registrys")
     @ResponseBody
-    public String  register(String username,String password){
+    public String  register(String username,String password,String id){
         System.out.println("duan dian 1");
         User user =userService.findByName(username);
         System.out.println(user);
         if(user.getUsername() == null){
+            personService.register(id);
             userService.insertUser(username,password);
             return "Y";
         }
