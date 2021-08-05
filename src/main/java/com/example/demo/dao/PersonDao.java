@@ -14,9 +14,8 @@ public class PersonDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-/*gjdflk*/
     public void createP(String id){
-        String sql="CREATE TABLE "+"T"+id+"(name varchar(30), id int, PRIMARY KEY(id))ENGINE=innodb DEFAULT CHARSET=utf8";
+        String sql="CREATE TABLE "+id+"(name varchar(30), id int, PRIMARY KEY(id))ENGINE=innodb DEFAULT CHARSET=utf8";
         jdbcTemplate.execute(sql);
         //jdbcTemplate.update("alter table xxx rename to ?",name);
     }
@@ -25,12 +24,11 @@ public class PersonDao {
 
     public Person findByName(String name, String Manager){
         final Person person = new Person();
-        String sql = "SELECT channelId FROM "+Manager+ " WHERE username=?";
+        String sql = "SELECT name FROM "+Manager+ " WHERE name=?";
         jdbcTemplate.query(sql, new Object[]{name}, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
-               person.setName(name);
-               //person.setId(resultSet.getString(1));
+               person.setName(resultSet.getString(1));
             }
         });
         return person;
@@ -69,7 +67,8 @@ public class PersonDao {
 
     public void addPerson(Person person,String manger){
         boolean is=false;
-        String sql="INSERT INTO "+manger+"(name,channelId) values("+person.getName()+","+person.getId()+")";
+        String name1=person.getName();
+        String sql="INSERT INTO "+manger+"(name) values("+name1+")";
         jdbcTemplate.execute(sql);
     }
 }

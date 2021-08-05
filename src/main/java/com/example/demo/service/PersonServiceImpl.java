@@ -30,7 +30,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public String add(String name, String manger) {
         if (userDao.findByName(name)!=null){
-            person=new Person(name,userDao.findByName(name).getId());
+            person=new Person(userDao.findByName(name).getId(),name);
             if (personDao.findByName(name,manger)!=null){
                 return "该朋友已添加";
             }
