@@ -16,7 +16,8 @@ public class UserServerHandler extends SimpleChannelInboundHandler<User> {
         String password=msg.getPassword();
         String aa=userController.login(username,password);
         if(aa=="success"){
-           ChatConfig.concurrentHashMap.put(username,ctx.channel());
+           ChatConfig.name.put(username,ctx.channel());
+           ChatConfig.name1.put(ctx.channel(),username);
         }
     }
 }

@@ -14,6 +14,10 @@
                     success: function (res) {
                         if(res=="success"){
                             alert("success")
+                            function login(){
+                                window.location.href='chat_client.html'
+                            }
+                            login()
                         }else{
                             alert("error");
                         }

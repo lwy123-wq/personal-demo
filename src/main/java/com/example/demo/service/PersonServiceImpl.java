@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void register(String id) {
 
-            personDao.createP(id);
+           // personDao.createP(id);
 
     }
     //id是主键，

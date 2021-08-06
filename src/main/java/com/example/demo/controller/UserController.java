@@ -67,7 +67,7 @@ public class UserController {
     public String  register(String username,String password,String id){
         System.out.println("duan dian 1");
         User user =userService.findByName(username);
-        System.out.println(user);
+        System.out.println(user.getUsername());
         if(user.getUsername() == null){
             personService.register(id);
             userService.insertUser(username,password);

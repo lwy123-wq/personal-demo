@@ -14,11 +14,11 @@ public class PersonDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public void createP(String id){
+  /*  public void createP(String id){
         String sql="CREATE TABLE "+id+"(name varchar(30), id int, PRIMARY KEY(id))ENGINE=innodb DEFAULT CHARSET=utf8";
         jdbcTemplate.execute(sql);
         //jdbcTemplate.update("alter table xxx rename to ?",name);
-    }
+    }*/
 
     //CREATE TABLE  id(name varchar(30), id int , PRIMARY KEY(id))ENGINE=innodb DEFAULT CHARSET=utf8
 
