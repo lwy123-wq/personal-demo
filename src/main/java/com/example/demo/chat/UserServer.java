@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-public class ChatServer {
+public class UserServer {
 
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;

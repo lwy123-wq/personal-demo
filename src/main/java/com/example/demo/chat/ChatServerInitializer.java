@@ -22,8 +22,9 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new HttpObjectAggregator(8192));
 
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-        pipeline.addLast(new UserServerHandler());
+
         //自定义handler,处理业务逻辑
+        pipeline.addLast(new UserServerHandler());
         pipeline.addLast(new ServerHandler());
 
 

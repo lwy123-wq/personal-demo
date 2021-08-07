@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.example.demo.dao.PersonDao;
-import com.example.demo.entity.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,9 +11,9 @@ class DemoApplicationTests {
     PersonDao personDao=new PersonDao();
     @Test
     void test() {
-        Person person=new Person("aaa");
+        /*Person person=new Person("aaa");
         //personDao.createP("ccc");
-        personDao.addPerson(person,"ccc");
+        personDao.addPerson(person,"ccc");*/
     }
 
 }
