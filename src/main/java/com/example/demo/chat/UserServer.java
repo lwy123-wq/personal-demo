@@ -24,10 +24,10 @@ public class UserServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new ChatServerInitializer());
+                    .childHandler(new UserServerInitializer());
 
             //启动服务器
-            ChannelFuture channelFuture = serverBootstrap.bind(8848).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();
             //log.info("开始启动聊天服务器结束");
             channelFuture.channel().closeFuture().sync();
 

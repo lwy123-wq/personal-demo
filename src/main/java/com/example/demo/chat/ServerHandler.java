@@ -1,9 +1,11 @@
 package com.example.demo.chat;
 
 import com.example.demo.entity.Message;
+import com.example.demo.entity.User;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -15,41 +17,49 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     public static AtomicInteger online = new AtomicInteger();
-
+    Message message=null;
+    int i=0;
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        Message message = new Gson().fromJson(msg.text(), Message.class);
+        message = new Gson().fromJson(msg.text(), Message.class);
         if(message==null){
-           sendMessageByChannel(ctx.channel(), new Message(ChatConfig.name1.get(ctx.channel()),"消息错误", System.currentTimeMillis()));
+           sendMessageByChannel(ctx.channel(), new Message(message.getName(),"消息错误", System.currentTimeMillis()));
         }else {
-           if(ChatConfig.name.get(message.getName())==null){
+            //ChatConfig.name.put(message.getName(),ctx.channel());
+            //ChannelId channelId = channelIdMap.get(message.getId());
+           if(message.getName()==null){
                System.out.println(message.getName()+"xxxxxxxxxxxxx");
                sendMessageByChannel(ctx.channel(),new Message(message.getName(),"对方已下线", System.currentTimeMillis()));
            }else {
 
-               sendMessageByChannel(channelGroup.find(ctx.channel().id()),message);
+               //sendMessageByChannel(channelGroup.find(ctx.channel().id()),message);
+               sendMessageForAll(message);
            }
         }
     }
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        ctx.pipeline().addLast(new UserServerHandler());
+
+        i++;
+        User user=new User();
         channelGroup.add(ctx.channel());
         Channel channel=ctx.channel();
         //ChatConfig..put(ctx.channel().name().asShortText(), ctx.channel().id());
         online.set(channelGroup.size());
-        sendMessageForAll(new Message(ChatConfig.name1.get(channel), ChatConfig.name1.get(channel), System.currentTimeMillis()));
-        System.out.println(ctx.channel().remoteAddress() + "上线！" + "--->" + ChatConfig.name1.get(channel));
+        sendMessageForAll(new Message(ChatConfig.name.get(i),ChatConfig.name.get(i), System.currentTimeMillis()));
+        System.out.println(ctx.channel().remoteAddress() + "上线！" + "--->" + ChatConfig.name.get(i));
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        int i=0;
+        i++;
         Channel channel=ctx.channel();
         channelGroup.remove(ctx.channel());
         //ChatConfig.name.remove(ChatConfig.name1.get(channel));
-        ChatConfig.name1.remove(channel);
+        ChatConfig.name.remove(i);
         online.set(channelGroup.size());
-        sendMessageForAll(new Message(ChatConfig.name1.get(channel), ctx.channel().id().asShortText(), System.currentTimeMillis()));
+        sendMessageForAll(new Message(ChatConfig.name.get(i), ChatConfig.name.get(i), System.currentTimeMillis()));
         System.out.println(ctx.channel().remoteAddress() + "下线！");
     }
 

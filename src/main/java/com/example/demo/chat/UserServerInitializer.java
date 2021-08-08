@@ -9,7 +9,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 
-public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
+public class UserServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -24,8 +24,8 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
         //自定义handler,处理业务逻辑
-        //pipeline.addLast(new UserServerHandler());
-        pipeline.addLast(new ServerHandler());
+        pipeline.addLast(new UserServerHandler());
+        //pipeline.addLast(new ServerHandler());
 
 
 
