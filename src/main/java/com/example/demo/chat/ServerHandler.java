@@ -10,6 +10,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -61,6 +63,18 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
         online.set(channelGroup.size());
         sendMessageForAll(new Message(ChatConfig.name.get(i), ChatConfig.name.get(i), System.currentTimeMillis()));
         System.out.println(ctx.channel().remoteAddress() + "下线！");
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if(evt instanceof IdleStateEvent){
+            IdleStateEvent event=(IdleStateEvent) evt;
+            //String eventType=null;
+            if(event.state()== IdleState.ALL_IDLE){
+
+                System.out.println(ctx.channel().remoteAddress()+"读写空闲\n");
+            }
+        }
     }
 
     @Override

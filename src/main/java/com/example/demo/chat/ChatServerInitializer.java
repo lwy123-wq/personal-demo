@@ -7,6 +7,9 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
@@ -25,6 +28,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
 
         //自定义handler,处理业务逻辑
         //pipeline.addLast(new UserServerHandler());
+        pipeline.addLast(new IdleStateHandler(0,0,7, TimeUnit.SECONDS));
         pipeline.addLast(new ServerHandler());
 
 
