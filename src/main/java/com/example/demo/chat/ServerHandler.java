@@ -5,7 +5,6 @@ import com.example.demo.entity.User;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelId;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -14,6 +13,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+import javax.servlet.http.HttpServlet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
@@ -61,7 +61,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
         //ChatConfig.name.remove(ChatConfig.name1.get(channel));
         ChatConfig.name.remove(i);
         online.set(channelGroup.size());
-        sendMessageForAll(new Message(ChatConfig.name.get(i), ChatConfig.name.get(i), System.currentTimeMillis()));
+        sendMessageForAll(new Message(ChatConfig.name.get(i), ChatConfig.name.get(i)+"下线！", System.currentTimeMillis()));
         System.out.println(ctx.channel().remoteAddress() + "下线！");
     }
 
@@ -71,8 +71,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
             IdleStateEvent event=(IdleStateEvent) evt;
             //String eventType=null;
             if(event.state()== IdleState.ALL_IDLE){
-
                 System.out.println(ctx.channel().remoteAddress()+"读写空闲\n");
+                sendMessageByChannel(ctx.channel(),new Message("","您已好久未和您的好友聊天了",System.currentTimeMillis()));
             }
         }
     }
