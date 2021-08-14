@@ -9,3 +9,6 @@ public class ChatConfig {
     public static ConcurrentHashMap<Integer, String> name = new ConcurrentHashMap<Integer,String>();
     public static ConcurrentHashMap<Channel,String> name1 = new ConcurrentHashMap<Channel,String>();
 }
+/**
+ * hello
+ * */
