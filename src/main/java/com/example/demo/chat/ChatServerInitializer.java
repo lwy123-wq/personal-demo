@@ -28,7 +28,7 @@ public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
 
         //自定义handler,处理业务逻辑
         //pipeline.addLast(new UserServerHandler());
-        pipeline.addLast(new IdleStateHandler(0,0,7, TimeUnit.SECONDS));
+        pipeline.addLast(new IdleStateHandler(0,0,60, TimeUnit.SECONDS));
         pipeline.addLast(new ServerHandler());
 
 

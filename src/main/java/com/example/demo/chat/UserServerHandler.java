@@ -7,18 +7,18 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 public class UserServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-
+    public static ChatConfig config=new ChatConfig();
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-        int i=0;
-        i++;
+        int i=config.getNum();
+        int num=i+1;
+        config.setNum(num);
         User message = new Gson().fromJson(msg.text(), User.class);
         String username=message.getUsername();
-        String password=message.getPassword();
-        System.out.println(username+"sssssssssss"+password);
-
-        ChatConfig.name.put(i,username);
+        ChatConfig.name.put(num,username);
+        System.out.println(ChatConfig.name.get(num));
+        System.out.println(num);
         //ChatConfig.name1.put(ctx.channel(),username);
         //System.out.println(ChatConfig.name.get(username));
 
