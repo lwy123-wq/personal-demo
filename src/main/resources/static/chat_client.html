@@ -67,19 +67,93 @@
             var name = document.getElementById("name");
             ws.send(JSON.stringify({"name": name.value, "content": msg.value, "timestamp": new Date().getTime()}));
             // msg.value = "";
+            //location.href="xie.html?"+"txt="+encodeURI(msg.value);
         }
     </script>
+    <style>
+        body {
+            background-image: url("img/true.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        .one {
+            width: 800px;
+            height: 700px;
+            background-color: rgba(0,0,0,.3);
+            margin: 50px auto;
+            padding: 50px 40px 0 150px;
+        }
+        #name {
+            width: 94px;
+            height: 45px;
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            padding:0 13px;
+
+        }
+
+        #message {
+            width: 370px;
+            height: 45px;
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            padding:0 13px;
+            margin-left: 30px;
+        }
+        button {
+            width: 80px;
+            height: 50px;
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: 15px;
+            margin-left: 30px;
+        }
+        button:hover {
+            color: white;
+            background-color: #31b0d5;
+        }
+        #content {
+            margin-top: 50px;
+        }
+        textarea {
+            overflow-x: scroll;
+            overflow-y: scroll;
+            outline: none;
+            background-color:#9bceea;
+            border-radius: 20px;
+        }
+
+    </style>
+
 </head>
 <body>
-<div class="one">
+<div class="one" onSubmit="return false;">
     <input id="name" type="text" placeholder="请输入好友名字"/>
     <input id="message" type="text" placeholder="请输入内容"/>
-    <button onclick="wsSend()">发送</button>
+    <button id="button" onclick="wsSend()" >发送</button>
 
     <div id="content">
+    </div>
+    <div>
 
     </div>
+</div>
+<!--<div class="one" onSubmit="return false;">
+    <div class="two" >
+        <input id="name" type="text" placeholder="请输入好友名字"/>
+        <input id="message" type="text" placeholder="请输入内容"/>
+        <button onclick="wsSend()">发送</button>
+        <div id="content">
+    <textarea rows="35" cols="90">
 
+    </textarea>
+        </div>
+        <div>
+
+        </div>
+    </div>-->
 </div>
 </body>
 </html>

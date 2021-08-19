@@ -13,10 +13,11 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServlet;
 import java.util.concurrent.atomic.AtomicInteger;
-
 public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     public static AtomicInteger online = new AtomicInteger();
@@ -28,6 +29,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
         if(message==null){
            sendMessageByChannel(ctx.channel(), new Message(message.getName(),"消息错误", System.currentTimeMillis()));
         }else {
+
             //ChatConfig.name.put(message.getName(),ctx.channel());
             ChannelId channelId = ChatConfig.map.get(message.getName());
             System.out.println(message.getName());

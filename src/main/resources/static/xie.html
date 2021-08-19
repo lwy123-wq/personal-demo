@@ -6,6 +6,18 @@
     <script>
         var progressbar={
         init:function(){
+        /*    var loc = location.href;
+            var n1 = loc.length;//地址的总长度
+            var n2 = loc.indexOf("=");//取得=号的位置
+            var id = decodeURI(loc.substr(n2+1, n1-n2));
+            var count=0;
+            if(id!=null){
+                count++;
+                document.getElementById('fill').innerHTML=count+'%';
+                if(count===100){
+                    count=100;
+                }
+            }*/
             var count=0;
             //通过间隔定时器实现百分比文字效果,通过计算CSS动画持续时间进行间隔设置
             var timer=setInterval(function(e){
@@ -13,6 +25,7 @@
                 document.getElementById('fill').innerHTML=count+'%';
                 if(count===100) clearInterval(timer);
             },85);
+
         }
     };
     progressbar.init();
@@ -23,12 +36,13 @@
 <div id="wrapper">
     <!--进度条容器-->
     <div id="progressbar">
-        <span style="width: auto">xxx</span>
+        <span style="width: auto"></span>
         <!--用来模仿进度条推进效果的进度条元素-->
         <div id="fill"></div>
     </div>
 </div>
 </body>
+
 <style>
     #wrapper{
         position: relative;
