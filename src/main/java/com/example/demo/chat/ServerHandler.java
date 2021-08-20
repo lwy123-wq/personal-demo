@@ -1,7 +1,6 @@
 package com.example.demo.chat;
 
 import com.example.demo.entity.Message;
-import com.example.demo.entity.User;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,24 +12,20 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServlet;
 import java.util.concurrent.atomic.AtomicInteger;
 public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     public static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     public static AtomicInteger online = new AtomicInteger();
     Message message=null;
     public static int i=0;
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         message = new Gson().fromJson(msg.text(), Message.class);
         if(message==null){
            sendMessageByChannel(ctx.channel(), new Message(message.getName(),"消息错误", System.currentTimeMillis()));
         }else {
-
-            //ChatConfig.name.put(message.getName(),ctx.channel());
             ChannelId channelId = ChatConfig.map.get(message.getName());
             System.out.println(message.getName());
            if(message.getName()==null){
@@ -58,7 +53,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         channelGroup.remove(ctx.channel());
-        //ChatConfig.name.remove(ChatConfig.name1.get(channel));
         ChatConfig.name.remove(i);
         online.set(channelGroup.size());
         sendMessageForAll(new Message(ChatConfig.name.get(i), ChatConfig.name.get(i)+"下线！", System.currentTimeMillis()));
@@ -69,7 +63,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if(evt instanceof IdleStateEvent){
             IdleStateEvent event=(IdleStateEvent) evt;
-            //String eventType=null;
             if(event.state()== IdleState.ALL_IDLE){
                 System.out.println(ctx.channel().remoteAddress()+"读写空闲\n");
                 sendMessageByChannel(ctx.channel(),new Message("","您已好久未和您的好友聊天了",System.currentTimeMillis()));

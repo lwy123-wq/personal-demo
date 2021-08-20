@@ -17,7 +17,6 @@ public class UserServer {
     private EventLoopGroup workGroup;
 
     private void run() throws Exception {
-        // log.info("开始启动聊天服务器");
         bossGroup = new NioEventLoopGroup(1);
         workGroup = new NioEventLoopGroup();
         try {
@@ -28,7 +27,6 @@ public class UserServer {
 
             //启动服务器
             ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();
-            //log.info("开始启动聊天服务器结束");
             channelFuture.channel().closeFuture().sync();
 
         } finally {
@@ -63,16 +61,3 @@ public class UserServer {
         }
     }
 }
-
-
-//.childHandler(new ChannelInitializer<SocketChannel>() {
-//
-//@Override
-//protected void initChannel(SocketChannel ch) throws Exception {
-//        ChannelPipeline pipeline = ch.pipeline();
-//        pipeline.addLast(new ChatServerInitializer());
-////                            pipeline.addLast("encoder", new StringDecoder());
-////                            pipeline.addLast("decoder", new StringDecoder());
-//
-//        }
-//        });
