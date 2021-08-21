@@ -33,7 +33,6 @@ public class UserDao implements UserService {
         jdbcTemplate.query(sql, new Object[]{name}, new RowCallbackHandler() {
             @Override
             public void processRow(ResultSet resultSet) throws SQLException {
-                //user.setId(resultSet.getString(1));
                 user.setUsername(resultSet.getString(1));
             }
         });
@@ -54,7 +53,3 @@ public class UserDao implements UserService {
         return user;
     }
 }
-
-
-/*
-*  ss*/
