@@ -1,5 +1,6 @@
 package com.example.demo.chat;
 
+import com.example.demo.chat.config.XieHandler;
 import com.example.demo.entity.Message;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
@@ -12,6 +13,10 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.concurrent.atomic.AtomicInteger;
 public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
@@ -19,10 +24,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     public static AtomicInteger online = new AtomicInteger();
     Message message=null;
     public static int i=0;
-
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         message = new Gson().fromJson(msg.text(), Message.class);
+        XieHandler xieHandler=new XieHandler();
+        xieHandler.handler(message);
         if(message==null){
            sendMessageByChannel(ctx.channel(), new Message(message.getName(),"消息错误", System.currentTimeMillis()));
         }else {

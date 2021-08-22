@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 import com.alibaba.druid.pool.DruidDataSource;
-
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+//(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
