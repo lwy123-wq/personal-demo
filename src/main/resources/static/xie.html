@@ -5,28 +5,30 @@
     <title>Title</title>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script>
-        $.ajax({
-            url: "/xie",
-            type: 'POST',
-                    //data: {'username': $("#username").val(), 'password': $("#password").val()},
-            success: function (res) {
-                var count=0;
-                if (res=="success"){
-                    alert("success")
-                    var progressbar={
-                        init:function(){
-                            //通过间隔定时器实现百分比文字效果,通过计算CSS动画持续时间进行间隔设置
-                            count++;
-                            document.getElementById('fill').innerHTML=count+'%';
+        $(function () {
+            $.ajax({
+                url: "/xie",
+                type: 'POST',
+                //data: {'username': $("#username").val(), 'password': $("#password").val()},
+                success: function (res) {
+                    var count = 0;
+                    if (res == "success") {
+                        alert("success")
+                        var progressbar = {
+                            init: function () {
+                                //通过间隔定时器实现百分比文字效果,通过计算CSS动画持续时间进行间隔设置
+                                count++;
+                                document.getElementById('fill').innerHTML = count + '%';
 
 
-                        }
-                    };
-                    progressbar.init();
-                }else {
-                    alert("error")
+                            }
+                        };
+                        progressbar.init();
+                    } else {
+                        alert("error")
+                    }
                 }
-            }
+            });
         });
     </script>
 <!--    <script>
