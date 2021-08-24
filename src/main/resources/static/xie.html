@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
     <script>
         $(function () {
             $.ajax({
                 url: "/xie",
                 type: 'POST',
-                //data: {'username': $("#username").val(), 'password': $("#password").val()},
-                success: function (res) {
+                //data: {'Message':id},
+                //dataType:"json",
+                success: function (id) {
                     var count = 0;
-                    if (res == "success") {
+                    if (id== 1) {
+                        print(id+"llllllllllllllll")
                         alert("success")
                         var progressbar = {
                             init: function () {
@@ -27,6 +29,9 @@
                     } else {
                         alert("error")
                     }
+                },
+                error:function (){
+                    alert("没有得到返回值\n")
                 }
             });
         });
