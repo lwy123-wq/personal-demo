@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script>
+ <!--   <script type="text/javascript" src="/js/jquery.js"></script>-->
+<!--    <script>
         $(function () {
             $.ajax({
                 url: "/xie",
@@ -35,8 +35,8 @@
                 }
             });
         });
-    </script>
-<!--    <script>
+    </script>-->
+    <script>
         var progressbar={
         init:function(){
             var count=0;
@@ -45,12 +45,12 @@
                 count++;
                 document.getElementById('fill').innerHTML=count+'%';
                 if(count===100) clearInterval(timer);
-            },85);
+            },850);
 
         }
     };
     progressbar.init();
-    </script>-->
+    </script>
 </head>
 <body>
 <!--外层容器-->
@@ -82,7 +82,7 @@
     }
     /*在进度条元素上调用动画*/
     #fill{
-        animation: move 10s;
+        animation: move 100s;
         /*width: auto;*/
         text-align: center;
         background-color: #6caf00;
