@@ -7,14 +7,6 @@ public class Message {
     private String content;
     private long timestamp;
 
-
-  /*  public Message1(String id, String content, long timestamp, String messageType) {
-        this.id = id;
-        this.content = content;
-        this.timestamp = timestamp;
-        this.messageType = messageType;
-    }*/
-
     public Message(String name, String content, long timestamp) {
         this.name = name;
         this.content = content;

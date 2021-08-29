@@ -14,7 +14,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private UserDao userDao;
-/*jhkglfsd*/
     @Autowired
     Person person;
 
