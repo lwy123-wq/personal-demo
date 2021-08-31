@@ -33,7 +33,7 @@ public class Message {
         return content;
     }
 
-    public void setContent(String content) {
+   /* public void setContent(String content) {
         this.content = content;
     }
 
@@ -43,6 +43,6 @@ public class Message {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
-    }
+    }*/
 
 }

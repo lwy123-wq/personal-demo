@@ -17,7 +17,6 @@ public class ChatServer {
     private EventLoopGroup workGroup;
 
     private void run() throws Exception {
-        // log.info("开始启动聊天服务器");
         bossGroup = new NioEventLoopGroup(1);
         workGroup = new NioEventLoopGroup();
         try {
@@ -28,7 +27,6 @@ public class ChatServer {
 
             //启动服务器
             ChannelFuture channelFuture = serverBootstrap.bind(8848).sync();
-            //log.info("开始启动聊天服务器结束");
             channelFuture.channel().closeFuture().sync();
 
         } finally {
