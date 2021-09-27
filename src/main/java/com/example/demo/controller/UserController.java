@@ -42,8 +42,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login")
-    public ModelAndView login(){
-        return new ModelAndView("/login.html");
+    public String login(){
+        return "/login.html";
     }
     @PostMapping(value = "/loginn")
     @ResponseBody

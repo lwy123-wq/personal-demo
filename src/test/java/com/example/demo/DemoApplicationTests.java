@@ -18,7 +18,7 @@ class DemoApplicationTests {
         /*Person person=new Person("aaa");
         //personDao.createP("ccc");
         personDao.addPerson(person,"ccc");*/
-        userService.insertUser("zhaosan","98768");
+        //userService.insertUser("zhaosan","98768");
     }
 
 }
